@@ -13,6 +13,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/colorAccentLight"
         android:orientation="vertical">
 
         <androidx.appcompat.widget.Toolbar
@@ -23,18 +24,19 @@
             app:theme="@style/AppTheme"/>
 
 
-        <FrameLayout
-            android:id="@+id/activity_main_frame_layout"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/activity_main_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"/>
+
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/activity_main_bottom_navigation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:background="@color/colorPrimary"
+            android:background="@color/colorPrimaryDark"
             app:itemIconTint="@color/colorAccentLight"
             app:itemTextColor="@color/colorAccentLight"
             app:menu="@menu/bottom_main"/>
@@ -48,25 +50,42 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/my_gradient_drawable"
+        app:itemIconSize="40dp"
+        app:itemIconPadding="50dp"
+        app:itemHorizontalPadding="20dp"
+        app:itemBackground="@color/colorPrimaryDark"
         app:itemTextColor="@color/colorAccentLight"
         app:itemIconTint="@color/colorAccentLight"
         app:headerLayout="@layout/activity_nav_drawer_header"
         app:menu="@menu/menu_drawer">
 
         <ImageView
-            android:layout_width="100dp"
-            android:layout_height="150dp"
-            android:layout_marginBottom="50dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="200dp"
             android:layout_gravity="center|bottom"
             android:src="@drawable/ic_horseshoe"
-            app:tint="@color/colorAccentLight" />
-    </com.google.android.material.navigation.NavigationView>
+            app:tint="@color/colorPrimaryDark" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/activity_main__recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="100dp"
+            android:layout_gravity="left|bottom"
+            android:src="@drawable/ic_horseshoe"
+            app:tint="@color/colorPrimaryDark" />
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginBottom="80dp"
+            android:layout_marginRight="50dp"
+            android:layout_gravity="right|bottom"
+            android:src="@drawable/ic_horseshoe"
+            app:tint="@color/colorPrimaryDark" />
+    </com.google.android.material.navigation.NavigationView>
 
 
 </androidx.drawerlayout.widget.DrawerLayout>

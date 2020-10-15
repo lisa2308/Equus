@@ -1,4 +1,4 @@
-package com.example.equus;
+package com.example.equus.entities;
 
 public class Horse {
 
@@ -6,12 +6,14 @@ public class Horse {
         private String name;
         private String proprietaire;
         private String telProprio;
+        private String uid;
 
-        public Horse(String photo, String name, String proprietaire, String telProprio){
+        public Horse(String photo, String name, String proprietaire, String telProprio, String uid){
             this.name = name;
             this.photo = photo;
             this.proprietaire = proprietaire;
             this.telProprio = telProprio;
+            this.uid = uid;
         }
 
     public String getPhoto() {
@@ -44,5 +46,13 @@ public class Horse {
 
     public void setTelProprio(String telProprio) {
         this.telProprio = telProprio;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 }

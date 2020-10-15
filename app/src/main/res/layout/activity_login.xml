@@ -15,8 +15,8 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:alpha="0.4"
-        android:background="@color/colorAccent"/>
+        android:alpha="0.1"
+        android:background="@color/colorAccentLight"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,8 +26,8 @@
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/animationView"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
             android:layout_marginTop="100sp"
             app:lottie_url="https://assets2.lottiefiles.com/packages/lf20_dIPEm0.json"
             app:lottie_autoPlay="true"
@@ -36,32 +36,32 @@
         <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-            android:layout_marginTop="20sp"
-            android:textSize="60sp"
+            android:layout_marginTop="5sp"
+            android:textSize="80sp"
         android:textStyle="bold"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/colorAccentLight"
         android:text="Equus"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:textColor="@color/colorAccent"
-            android:textSize="12sp"
+            android:textColor="@color/colorAccentLight"
+            android:textSize="25sp"
             android:text="HorseCare"/>
 
-        <EditText
+        <Button
+            android:id="@+id/buttonLogin"
             android:layout_width="300dp"
             android:layout_height="40dp"
-            android:text="Entrez votre code écuries"
-            android:textSize="12sp"
-            android:textColor="@color/colorAccent"
-            android:background="@color/colorPrimaryLight"
+            android:text="Code d'accès"
+            android:textSize="20sp"
+            android:textColor="@color/colorAccentLight"
+            android:background="@color/colorPrimaryDark"
             android:gravity="center"
-            android:layout_marginTop="50dp"
-            >
+            android:layout_marginTop="70dp">
 
-        </EditText>
+        </Button>
     </LinearLayout>
 
 </RelativeLayout>

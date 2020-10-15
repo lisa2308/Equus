@@ -7,15 +7,18 @@
             android:id="@+id/activity_main_drawer_recap"
             android:icon="@drawable/ic_fact_check_24px"
             android:title="RECAP" />
-        <item
+    <item
             android:id="@+id/activity_main_drawer_notes"
             android:icon="@drawable/ic_mes_notes"
             android:title="MES NOTES" />
+
         <item
             android:id="@+id/activity_main_drawer_alarm"
             android:icon="@drawable/ic_notification_important_black_18dp"
             android:title="NOTIFICATIONS" />
-
+        <item
+            android:id="@+id/activity_main_drawer_logout"
+            android:icon="@drawable/ic_logout"
+            android:title="DECONNEXION" />
     </group>
-
 </menu>

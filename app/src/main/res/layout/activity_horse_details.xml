@@ -11,6 +11,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/colorAccentLight"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:orientation="vertical">
 
@@ -28,7 +29,7 @@
             android:layout_below="@id/horse_details_photo" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/horse_details_button"
+            android:id="@+id/activity_horse_details_fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -36,7 +37,20 @@
             android:layout_marginBottom="-28dp"
             android:layout_marginRight="20dp"
             android:src="@drawable/ic_block_white_18dp"
-            app:backgroundTint="@color/colorPrimaryLight"
+            app:backgroundTint="@color/colorAccentLight"
+            android:tint="@color/colorAccent"
+            tools:ignore="RelativeOverlap" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/horse_details_button_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignBottom="@id/horse_details_photo"
+            android:layout_marginBottom="-28dp"
+            android:layout_marginRight="90dp"
+            android:src="@drawable/ic_edit"
+            app:backgroundTint="@color/colorAccentLight"
             android:tint="@color/colorAccent"
             tools:ignore="RelativeOverlap" />
 
@@ -44,8 +58,8 @@
             android:id="@+id/horse_details_layout"
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:background="@color/colorPrimary"
-            android:layout_below="@+id/horse_details_button">
+            android:background="@drawable/my_gradient_drawable"
+            android:layout_below="@+id/activity_horse_details_fab">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -54,7 +68,7 @@
                 android:layout_marginTop="10dp">
 
                 <TextView
-                    android:id="@+id/horse_details_title"
+                    android:id="@+id/name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Nom du poney"
@@ -64,7 +78,7 @@
                     android:layout_marginTop="7dp"
                     android:layout_marginLeft="25dp"
                     android:textSize="25sp"
-                    android:textColor="@color/colorAccent" />
+                    android:textColor="@color/colorAccentLight" />
 
             </LinearLayout>
 
@@ -85,6 +99,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Propriétaire "
+                android:drawableLeft="@drawable/ic_helmet"
+                android:drawableTint="@color/colorPrimaryDark"
+                android:drawablePadding="20dp"
+                android:textStyle="bold"
                 android:textSize="20sp"
                 android:textColor="@color/colorAccent" />
 
@@ -92,21 +110,38 @@
                 android:id="@+id/activity_horse_details_numTel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_smartphone"
                 android:text="Numéro de téléphone"
+                android:drawableTint="@color/colorPrimaryDark"
+                android:drawablePadding="20dp"
                 android:textSize="20sp"
                 android:layout_marginTop="20dp"
                 android:textColor="@color/colorAccent"/>
         </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/activity_horse_details_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_below="@+id/activity_horse_details_presentation">
+
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/activity_main_recycler_view_incident"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </RelativeLayout>
+
         <RelativeLayout
             android:id="@+id/activity_horse_details_care"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/activity_horse_details_presentation">
+            android:layout_below="@+id/activity_horse_details_recycler">
 
             <Spinner
                 android:id="@+id/activity_horse_details_care_spinner"
                 android:layout_width="150dp"
                 android:layout_height="50dp"
+                android:backgroundTint="@android:color/black"
                 android:entries="@array/spinnerItems"
                 android:layout_marginLeft="20dp">
             </Spinner>
@@ -116,6 +151,8 @@
                 android:layout_width="200dp"
                 android:layout_height="50dp"
                 android:layout_marginLeft="20dp"
+                android:layout_marginRight="5dp"
+                android:backgroundTint="@android:color/black"
                 android:layout_toRightOf="@+id/activity_horse_details_care_spinner">
 
             </EditText>
@@ -124,8 +161,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
                 android:layout_marginLeft="20dp"
-                android:background="@color/colorPrimaryLight"
+                android:textColor="@color/colorAccentLight"
+                android:textStyle="bold"
+                android:background="@drawable/my_gradient_drawable"
                 android:text="Valider"
+                android:layout_marginBottom="30dp"
                 android:layout_below="@id/activity_horse_details_text">
 
             </Button>
