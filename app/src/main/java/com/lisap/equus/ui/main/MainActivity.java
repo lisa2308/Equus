@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.lisap.equus.data.entities.Horse;
 import com.lisap.equus.R;
 import com.lisap.equus.ui.login.LoginActivity;
+import com.lisap.equus.ui.main.navdrawer.owner.OwnerListActivity;
 import com.lisap.equus.utils.RecyclerViewHolderListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
@@ -33,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         NavigationView.OnNavigationItemSelectedListener {
 
     RecyclerView recyclerView;
-    private RecyclerViewAdapter recyclerViewAdapter;
+    private MainAdapter mainAdapter;
     Toolbar toolbar;
     DrawerLayout drawerLayout;
     NavigationView mNavigationView;
@@ -58,8 +59,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         //horseList.add(new Horse("https://i.ytimg.com/vi/-ql6xV-iTKc/maxresdefault.jpg", "Marco","Manon Breillet","0450251474"));
         //horseList.add(new Horse("https://i.ytimg.com/vi/-ql6xV-iTKc/maxresdefault.jpg", "Capri","Marie Ouannes","0625272824"));
         //ASSOCIATE ADAPTER WITH RECYCLER//
-        recyclerViewAdapter = new RecyclerViewAdapter(horseList, listener);
-        recyclerView.setAdapter(recyclerViewAdapter);
+        mainAdapter = new MainAdapter(horseList, listener);
+        recyclerView.setAdapter(mainAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.addItemDecoration(new DividerItemDecoration(MainActivity.this,DividerItemDecoration.VERTICAL));
     }
@@ -92,15 +93,21 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             Horse h = (Horse) item;
             Intent i = new Intent(MainActivity.this, HorsedetailsActivity.class);
             i.putExtra("name", h.getName());
-            i.putExtra("proprietaire", h.getOwner());
-            i.putExtra("telproprio", h.getOwnerPhone());
+//            i.putExtra("proprietaire", h.getOwner());
+//            i.putExtra("telproprio", h.getOwnerPhone());
             startActivity(i);
         }
+
+        @Override
+        public void onItemLongClicked(RecyclerView.ViewHolder viewHolder, Object item, int pos) {}
     };
 
     @Override
     public boolean onNavigationItemSelected(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
+            case R.id.activity_main_drawer_owners:
+                startOwnerListActivity();
+                break;
             case R.id.activity_main_drawer_logout:
                 SharedPreferencesManager.putStable(this, null);
                 startLoginActivity();
@@ -123,8 +130,12 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         }
     }
 
-    public void startLoginActivity() {
+    private void startLoginActivity() {
         startActivity(new Intent(this, LoginActivity.class));
+    }
+
+    private void startOwnerListActivity() {
+        startActivity(new Intent(this, OwnerListActivity.class));
     }
 
     @Override

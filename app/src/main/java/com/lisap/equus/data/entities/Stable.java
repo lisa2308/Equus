@@ -3,59 +3,42 @@ package com.lisap.equus.data.entities;
 import java.util.List;
 
 public class Stable {
-    private String uid;
-    private List<Horse> horses;
-    private String stableName;
-    private String password;
+    private String idStable;
+    private String name;
+    private String accessCode;
 
     public Stable() {}
 
-    public Stable(String uid, List<Horse> horses, String stableName, String password) {
-        this.uid = uid;
-        this.horses = horses;
-        this.stableName = stableName;
-        this.password = password;
+    public String getIdStable() {
+        return idStable;
     }
 
-    public String getUid() {
-        return uid;
+    public void setIdStable(String idStable) {
+        this.idStable = idStable;
     }
 
-    public void setUid(String uid) {
-        this.uid = uid;
+    public String getName() {
+        return name;
     }
 
-    public List<Horse> getHorses() {
-        return horses;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setHorses(List<Horse> horses) {
-        this.horses = horses;
+    public String getAccessCode() {
+        return accessCode;
     }
 
-    public String getStableName() {
-        return stableName;
-    }
-
-    public void setStableName(String stableName) {
-        this.stableName = stableName;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+    public void setAccessCode(String accessCode) {
+        this.accessCode = accessCode;
     }
 
     @Override
     public String toString() {
         return "Stable{" +
-                "uid='" + uid + '\'' +
-                ", horses=" + horses +
-                ", stableName='" + stableName + '\'' +
-                ", password='" + password + '\'' +
+                "idStable='" + idStable + '\'' +
+                ", name='" + name + '\'' +
+                ", accessCode='" + accessCode + '\'' +
                 '}';
     }
 }

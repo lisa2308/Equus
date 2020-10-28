@@ -10,7 +10,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.activities.NotesActivity">
+        <activity android:name=".ui.main.navdrawer.notes.NotesActivity">
         </activity>
         <activity android:name=".ui.activities.AddHorseActivity">
         </activity>
@@ -18,23 +18,30 @@
             android:name=".ui.login.LoginActivity"
             android:theme="@style/NoActionBarThemebis">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity
             android:name=".ui.main.MainActivity"
-            android:theme="@style/NoActionBarTheme">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
+            android:theme="@style/NoActionBarTheme"/>
+        <activity android:name=".ui.main.navdrawer.owner.OwnerListActivity"
+            android:parentActivityName=".ui.main.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.main.MainActivity" />
+        </activity>
+        <activity android:name=".ui.main.navdrawer.owner.addupdate.OwnerAddUpdateActivity"
+            android:parentActivityName=".ui.main.navdrawer.owner.OwnerListActivity"
+            android:theme="@style/AppThemeDark">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.main.navdrawer.owner.OwnerListActivity" />
         </activity>
         <activity
             android:name=".ui.activities.HorsedetailsActivity"
-            android:theme="@style/NoActionBarThemebis" />
+            android:theme="@style/NoActionBarThemebis"/>
     </application>
 
 </manifest>

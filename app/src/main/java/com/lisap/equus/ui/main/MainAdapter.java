@@ -15,24 +15,24 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.RecyclerHolder> {
+public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainHolder> {
 
     List<Horse> horseList;
     RecyclerViewHolderListener listener;
 
-    public RecyclerViewAdapter(List<Horse> horseList, RecyclerViewHolderListener listener){
+    public MainAdapter(List<Horse> horseList, RecyclerViewHolderListener listener){
         this.horseList = horseList;
         this.listener = listener;
     }
 
-    public static class RecyclerHolder extends RecyclerView.ViewHolder{
+    public static class MainHolder extends RecyclerView.ViewHolder{
         ImageView photo;
         TextView name;
         TextView proprietaire;
         TextView telProprietaire;
 
 
-        public RecyclerHolder(View view){
+        public MainHolder(View view){
             super(view);
             photo = view.findViewById(R.id.activity_main_item_photo);
             name = view.findViewById(R.id.activity_main_item_name);
@@ -42,20 +42,20 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     @Override
-    public RecyclerHolder onCreateViewHolder(final ViewGroup parent, int viewType){
+    public MainHolder onCreateViewHolder(final ViewGroup parent, int viewType){
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.activity_main_item,parent,false);
-        return new RecyclerHolder(itemView);
+        return new MainHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(final RecyclerHolder holder, final int position) {
+    public void onBindViewHolder(final MainHolder holder, final int position) {
 
         //position liée à la ligne donc change toute seule//
         final Horse horse = horseList.get(position);
 
         holder.name.setText(horse.getName());
-        Picasso.get().load(horse.getPhoto()).into(holder.photo);
+        Picasso.get().load(horse.getImageUrl()).into(holder.photo);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

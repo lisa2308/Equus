@@ -3,7 +3,6 @@ apply plugin: 'com.google.gms.google-services'
 android {
     compileSdkVersion 29
 
-
     defaultConfig {
         applicationId "com.lisap.equus"
         minSdkVersion 21
@@ -46,5 +45,6 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     implementation 'com.firebaseui:firebase-ui-firestore:6.3.0'
     implementation 'com.google.firebase:firebase-analytics:17.5.0'
+    implementation 'com.github.mejdi14:Flat-Dialog-Android:1.0.5'
 }
 apply plugin: 'com.google.gms.google-services'

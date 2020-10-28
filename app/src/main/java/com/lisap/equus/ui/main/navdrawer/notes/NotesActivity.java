@@ -1,4 +1,4 @@
-package com.lisap.equus.ui.activities;
+package com.lisap.equus.ui.main.navdrawer.notes;
 
 import android.os.Bundle;
 

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:background="@drawable/custom_background_activity_owner_list"
+    android:layout_margin="10dp">
+
+    <TextView
+        android:id="@+id/activity_owner_list_item_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nom Prénom"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"/>
+
+    <TextView
+        android:id="@+id/activity_owner_list_item_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="06 06 06 06 06"
+        android:textSize="14sp"
+        android:gravity="center"/>
+
+</LinearLayout>

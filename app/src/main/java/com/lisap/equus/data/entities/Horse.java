@@ -1,27 +1,11 @@
 package com.lisap.equus.data.entities;
 
 public class Horse {
-    private String photo;
     private String name;
-    private String owner;
-    private String ownerPhone;
+    private String imageUrl;
+    private boolean isStopped;
 
     public Horse() {}
-
-    public Horse(String photo, String name, String owner, String ownerPhone){
-        this.name = name;
-        this.photo = photo;
-        this.owner = owner;
-        this.ownerPhone = ownerPhone;
-    }
-
-    public String getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(String photo) {
-        this.photo = photo;
-    }
 
     public String getName() {
         return name;
@@ -31,29 +15,28 @@ public class Horse {
         this.name = name;
     }
 
-    public String getOwner() {
-        return owner;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setOwner(String owner) {
-        this.owner = owner;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
-    public String getOwnerPhone() {
-        return ownerPhone;
+    public boolean isStopped() {
+        return isStopped;
     }
 
-    public void setOwnerPhone(String ownerPhone) {
-        this.ownerPhone = ownerPhone;
+    public void setStopped(boolean stopped) {
+        isStopped = stopped;
     }
 
     @Override
     public String toString() {
         return "Horse{" +
-                "photo='" + photo + '\'' +
                 ", name='" + name + '\'' +
-                ", owner='" + owner + '\'' +
-                ", ownerPhone='" + ownerPhone + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", isStopped=" + isStopped +
                 '}';
     }
 }

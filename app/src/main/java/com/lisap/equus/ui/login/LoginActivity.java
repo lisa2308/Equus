@@ -38,7 +38,7 @@ public class LoginActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
 
-        binding.buttonLogin.setOnClickListener(new View.OnClickListener() {
+        binding.activityLoginBtnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View vi) {
 
@@ -74,7 +74,7 @@ public class LoginActivity extends AppCompatActivity {
 
                                     Stable stable = document.toObject(Stable.class);
                                     // add uid to stable object
-                                    stable.setUid(uid);
+                                    stable.setIdStable(uid);
 
                                     // save stable in shared preferences
                                     SharedPreferencesManager.putStable(LoginActivity.this, stable);

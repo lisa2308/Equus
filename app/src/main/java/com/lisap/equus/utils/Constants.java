@@ -8,8 +8,10 @@ public class Constants {
     // FIREBASE
     public static final String FIREBASE_COLLECTION_NAME_STABLES = "stables";
     public static final String FIREBASE_COLLECTION_NAME_HORSES = "horses";
+    public static final String FIREBASE_COLLECTION_NAME_OWNERS = "owners";
+    public static final String FIREBASE_COLLECTION_NAME_NOTES = "notes";
 
-    public static final String FIREBASE_HORSE_COLUMN_OWNER = "owner";
-    public static final String FIREBASE_HORSE_COLUMN_OWNER_PHONE = "ownerPhone";
+//    public static final String FIREBASE_HORSE_COLUMN_OWNER = "owner";
+//    public static final String FIREBASE_HORSE_COLUMN_OWNER_PHONE = "ownerPhone";
 
 }
