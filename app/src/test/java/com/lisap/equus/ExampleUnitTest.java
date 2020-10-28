@@ -1,4 +1,4 @@
-package com.example.equus;
+package com.lisap.equus;
 
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package com.example.equus;
+package com.lisap.equus.utils;
 
 import androidx.recyclerview.widget.RecyclerView;
 

@@ -1,4 +1,4 @@
-package com.example.equus.activities;
+package com.lisap.equus.ui.main;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,16 +16,19 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.equus.entities.Horse;
-import com.example.equus.R;
-import com.example.equus.RecyclerViewAdapter;
-import com.example.equus.RecyclerViewHolderListener;
+import com.lisap.equus.data.entities.Horse;
+import com.lisap.equus.R;
+import com.lisap.equus.ui.login.LoginActivity;
+import com.lisap.equus.utils.RecyclerViewHolderListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
+import com.lisap.equus.ui.activities.HorsedetailsActivity;
+import com.lisap.equus.utils.SharedPreferencesManager;
 
 import java.util.ArrayList;
 import java.util.List;
 
+// todo : securiser password hash
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener,
         NavigationView.OnNavigationItemSelectedListener {
 
@@ -89,16 +92,22 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             Horse h = (Horse) item;
             Intent i = new Intent(MainActivity.this, HorsedetailsActivity.class);
             i.putExtra("name", h.getName());
-            i.putExtra("proprietaire", h.getProprietaire());
-            i.putExtra("telproprio", h.getTelProprio());
+            i.putExtra("proprietaire", h.getOwner());
+            i.putExtra("telproprio", h.getOwnerPhone());
             startActivity(i);
         }
-
     };
 
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        return false;
+    public boolean onNavigationItemSelected(MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
+            case R.id.activity_main_drawer_logout:
+                SharedPreferencesManager.putStable(this, null);
+                startLoginActivity();
+                break;
+        }
+
+        return true;
     }
 
     @Override
@@ -106,7 +115,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         switch (item.getItemId()) {
             case R.id.menu_search:
                 return true;
-
             case android.R.id.home:
                 drawerLayout.openDrawer(GravityCompat.START);
                 return true;
@@ -114,4 +122,11 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 return true;
         }
     }
+
+    public void startLoginActivity() {
+        startActivity(new Intent(this, LoginActivity.class));
+    }
+
+    @Override
+    public void onBackPressed() {}
 }

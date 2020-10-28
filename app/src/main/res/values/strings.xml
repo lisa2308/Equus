@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">Equus</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Annuler</string>
+
+    <!-- Login Activity -->
+    <string name="password">Code d\'accès</string>
+    <string name="pleaseEnterPassword">Merci de rentrer votre code d\'accès</string>
+    <string name="invalidPassword">Mot de passe non valide</string>
 
 </resources>

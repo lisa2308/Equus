@@ -5,7 +5,7 @@ android {
 
 
     defaultConfig {
-        applicationId "com.example.equus"
+        applicationId "com.lisap.equus"
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 1

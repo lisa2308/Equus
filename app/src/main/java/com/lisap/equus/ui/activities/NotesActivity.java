@@ -1,10 +1,10 @@
-package com.example.equus.activities;
+package com.lisap.equus.ui.activities;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.equus.R;
+import com.lisap.equus.R;
 
 public class NotesActivity extends AppCompatActivity {
 

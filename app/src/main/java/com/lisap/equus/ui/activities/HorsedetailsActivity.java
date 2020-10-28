@@ -1,4 +1,4 @@
-package com.example.equus.activities;
+package com.lisap.equus.ui.activities;
 
 import android.content.Intent;
 import android.content.res.ColorStateList;
@@ -8,8 +8,8 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
-import com.example.equus.R;
-import com.example.equus.databinding.ActivityHorseDetailsBinding;
+import com.lisap.equus.R;
+import com.lisap.equus.databinding.ActivityHorseDetailsBinding;
 
 
 public class HorsedetailsActivity extends AppCompatActivity {

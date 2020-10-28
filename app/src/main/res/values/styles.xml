@@ -22,9 +22,10 @@
         <item name="colorAccent">@color/colorAccentLight</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-
     </style>
 
-
+    <style name="AlertDialogCustom" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:colorAccent">@color/colorAccent</item>
+    </style>
 
 </resources>

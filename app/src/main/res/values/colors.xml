@@ -6,6 +6,7 @@
     <color name="colorAccent">#000</color>
     <color name="colorAccentLight">#fff</color>
     <color name="colorIncident">#FF0000</color>
+    <color name="colorLightGrey">#D3D3D3</color>
 
 
 </resources>

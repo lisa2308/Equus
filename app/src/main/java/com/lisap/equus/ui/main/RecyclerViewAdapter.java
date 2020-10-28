@@ -1,4 +1,4 @@
-package com.example.equus;
+package com.lisap.equus.ui.main;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,7 +8,9 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.equus.entities.Horse;
+import com.lisap.equus.R;
+import com.lisap.equus.utils.RecyclerViewHolderListener;
+import com.lisap.equus.data.entities.Horse;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
