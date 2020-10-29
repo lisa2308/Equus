@@ -8,10 +8,6 @@
                 android:icon="@drawable/ic_fact_check_24px"
                 android:title="Récapitulatif" />
             <item
-                android:id="@+id/activity_main_drawer_notes"
-                android:icon="@drawable/ic_mes_notes"
-                android:title="Mes notes" />
-            <item
                 android:id="@+id/activity_main_drawer_owners"
                 android:icon="@drawable/ic_helmet"
                 android:title="Propriétaires" />

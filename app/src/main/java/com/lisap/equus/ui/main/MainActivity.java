@@ -18,7 +18,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.lisap.equus.data.entities.Horse;
 import com.lisap.equus.R;
+import com.lisap.equus.data.entities.Note;
 import com.lisap.equus.ui.login.LoginActivity;
+import com.lisap.equus.ui.main.navdrawer.notes.NoteListActivity;
 import com.lisap.equus.ui.main.navdrawer.owner.OwnerListActivity;
 import com.lisap.equus.utils.RecyclerViewHolderListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -122,12 +124,19 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         switch (item.getItemId()) {
             case R.id.menu_search:
                 return true;
+            case R.id.menu_note:
+                startNoteListActivity();
+                return true;
             case android.R.id.home:
                 drawerLayout.openDrawer(GravityCompat.START);
                 return true;
             default:
                 return true;
         }
+    }
+
+    private void startNoteListActivity() {
+        startActivity(new Intent(this, NoteListActivity.class));
     }
 
     private void startLoginActivity() {

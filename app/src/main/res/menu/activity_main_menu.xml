@@ -3,15 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/menu_sms"
-        android:title="search"
-        android:icon="@drawable/ic_textsms_white_18dp"
-        app:showAsAction="always"/>
-
-    <item
         android:id="@+id/menu_note"
         android:title="search"
-        android:icon="@drawable/ic_note_add_white_18dp"
+        android:icon="@drawable/ic_mes_notes"
         app:showAsAction="always"/>
 
     <item

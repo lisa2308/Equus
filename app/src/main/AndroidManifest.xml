@@ -5,13 +5,11 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_launcher_app"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.main.navdrawer.notes.NotesActivity">
-        </activity>
         <activity android:name=".ui.activities.AddHorseActivity">
         </activity>
         <activity
@@ -38,6 +36,19 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.main.navdrawer.owner.OwnerListActivity" />
+        </activity>
+        <activity android:name=".ui.main.navdrawer.notes.NoteListActivity"
+            android:parentActivityName=".ui.main.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.main.MainActivity" />
+        </activity>
+        <activity android:name=".ui.main.navdrawer.notes.addupdate.NoteAddUpdateActivity"
+            android:parentActivityName=".ui.main.navdrawer.notes.NoteListActivity"
+            android:theme="@style/AppThemeDark">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.main.navdrawer.notes.NoteListActivity" />
         </activity>
         <activity
             android:name=".ui.activities.HorsedetailsActivity"
