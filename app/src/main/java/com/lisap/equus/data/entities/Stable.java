@@ -1,8 +1,11 @@
 package com.lisap.equus.data.entities;
 
+import com.google.firebase.firestore.Exclude;
+
 import java.util.List;
 
 public class Stable {
+    @Exclude
     private String idStable;
     private String name;
     private String accessCode;

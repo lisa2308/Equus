@@ -1,8 +1,11 @@
 package com.lisap.equus.data.entities;
 
+import com.google.firebase.firestore.Exclude;
+
 import java.io.Serializable;
 
 public class Note implements Serializable {
+    @Exclude
     private String noteId;
     private String date;
     private String message;

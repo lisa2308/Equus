@@ -55,7 +55,6 @@
         android:layout_marginTop="10dp"
         android:layout_marginBottom="20dp"/>
 
-
     <RelativeLayout
         android:id="@+id/activity_owner_add_update_btn_save"
         android:layout_width="200dp"

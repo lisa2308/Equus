@@ -2,9 +2,12 @@ package com.lisap.equus.data.entities;
 
 import android.os.Parcelable;
 
+import com.google.firebase.firestore.Exclude;
+
 import java.io.Serializable;
 
 public class Owner implements Serializable {
+    @Exclude
     private String ownerId;
     private String lastname;
     private String firstname;
@@ -46,11 +49,6 @@ public class Owner implements Serializable {
 
     @Override
     public String toString() {
-        return "Owner{" +
-                "ownerId='" + ownerId + '\'' +
-                ", lastname='" + lastname + '\'' +
-                ", firstname='" + firstname + '\'' +
-                ", phone='" + phone + '\'' +
-                '}';
+        return firstname + " " + lastname;
     }
 }

@@ -1,4 +1,4 @@
-package com.lisap.equus.ui.main.navdrawer.notes;
+package com.lisap.equus.ui.main.notes;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,7 +17,7 @@ import com.lisap.equus.data.entities.Note;
 import com.lisap.equus.data.firestore.DbNote;
 import com.lisap.equus.databinding.ActivityNoteListBinding;
 
-import com.lisap.equus.ui.main.navdrawer.notes.addupdate.NoteAddUpdateActivity;
+import com.lisap.equus.ui.main.notes.addupdate.NoteAddUpdateActivity;
 import com.lisap.equus.utils.RecyclerViewHolderListener;
 import com.lisap.equus.utils.SharedPreferencesManager;
 

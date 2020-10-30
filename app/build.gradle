@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
+
 android {
     compileSdkVersion 29
 
@@ -26,8 +27,6 @@ android {
     buildFeatures {
         viewBinding true
     }
-
-
 }
 
 dependencies {
@@ -38,6 +37,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.2.1'
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'com.google.firebase:firebase-storage:19.1.1'
     testImplementation 'junit:junit:4.12'
     implementation 'com.google.gms:google-services:4.3.3'
     implementation 'com.airbnb.android:lottie:3.4.2'
@@ -46,5 +46,9 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui-firestore:6.3.0'
     implementation 'com.google.firebase:firebase-analytics:17.5.0'
     implementation 'com.github.mejdi14:Flat-Dialog-Android:1.0.5'
+    implementation 'com.karumi:dexter:6.2.0'
+    implementation 'com.github.esafirm.android-image-picker:imagepicker:2.3.1'
+    implementation 'com.github.esafirm.android-image-picker:rximagepicker:2.3.1'
 }
+
 apply plugin: 'com.google.gms.google-services'

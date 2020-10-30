@@ -1,4 +1,4 @@
-package com.lisap.equus.ui.main.navdrawer.notes;
+package com.lisap.equus.ui.main.notes;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.lisap.equus.R;
 import com.lisap.equus.data.entities.Note;
-import com.lisap.equus.data.entities.Owner;
 import com.lisap.equus.utils.RecyclerViewHolderListener;
 
 import java.util.List;
@@ -21,7 +20,7 @@ public class NoteListAdapter extends RecyclerView.Adapter<NoteListAdapter.NoteLi
     RecyclerViewHolderListener listener;
 
     public NoteListAdapter(List<Note> noteList,
-                            RecyclerViewHolderListener listener){
+                           RecyclerViewHolderListener listener){
         this.noteList = noteList;
         this.listener = listener;
     }
@@ -72,7 +71,7 @@ public class NoteListAdapter extends RecyclerView.Adapter<NoteListAdapter.NoteLi
         return noteList.size();
     }
 
-    public void setData(List<Note> ownerList) {
+    public void setData(List<Note> noteList) {
         this.noteList = noteList;
         notifyDataSetChanged();
     }

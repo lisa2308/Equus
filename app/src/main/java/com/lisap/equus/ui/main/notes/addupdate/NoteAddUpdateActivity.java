@@ -1,5 +1,6 @@
-package com.lisap.equus.ui.main.navdrawer.notes.addupdate;
+package com.lisap.equus.ui.main.notes.addupdate;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,10 +14,14 @@ import com.lisap.equus.data.firestore.DbNote;
 import com.lisap.equus.databinding.ActivityNoteAddUpdateBinding;
 import com.lisap.equus.utils.SharedPreferencesManager;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 public class NoteAddUpdateActivity extends AppCompatActivity {
     private ActivityNoteAddUpdateBinding binding;
     private String date, message;
     private Note extraNote;
+    private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +41,7 @@ public class NoteAddUpdateActivity extends AppCompatActivity {
             loadData(extraNote);
         }
 
+        setEditDateClickListener();
         setSaveBtnClickListener();
     }
 
@@ -68,6 +74,28 @@ public class NoteAddUpdateActivity extends AppCompatActivity {
         return true;
     }
 
+    private void setEditDateClickListener() {
+        final Calendar calendar = Calendar.getInstance();
+
+        DatePickerDialog.OnDateSetListener datePickerListener = (view, year, monthOfYear, dayOfMonth) -> {
+            calendar.set(Calendar.YEAR, year);
+            calendar.set(Calendar.MONTH, monthOfYear);
+            calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
+            binding.activityNoteAddUpdateEditDate.setText(sdf.format(calendar.getTime()));
+        };
+
+        binding.activityNoteAddUpdateEditDate.setOnClickListener(view -> {
+            new DatePickerDialog(
+                    this,
+                    datePickerListener,
+                    calendar.get(Calendar.YEAR),
+                    calendar.get(Calendar.MONTH),
+                    calendar.get(Calendar.DAY_OF_MONTH)
+            ).show();
+        });
+    }
+
     private void setSaveBtnClickListener() {
         binding.activityNoteAddUpdateBtnSave.setOnClickListener(view -> {
             if (isFormValid()) {
@@ -76,7 +104,7 @@ public class NoteAddUpdateActivity extends AppCompatActivity {
                 // creation
                 if (extraNote == null) {
                     // create new note object
-                     Note note = new Note();
+                    Note note = new Note();
                     note.setDate(date);
                     note.setMessage(message);
 

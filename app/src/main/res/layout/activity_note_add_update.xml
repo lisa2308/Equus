@@ -21,7 +21,9 @@
         android:inputType="datetime"
         android:textColor="@color/colorPrimary"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="20dp"/>
+        android:layout_marginBottom="20dp"
+        android:focusable="false"
+        android:clickable="true"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -39,7 +41,6 @@
         android:textColor="@color/colorPrimary"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="20dp"/>
-
 
     <RelativeLayout
         android:id="@+id/activity_note_add_update_btn_save"

@@ -9,8 +9,12 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.lisap.equus.R;
+import com.lisap.equus.data.entities.Note;
+import com.lisap.equus.utils.Constants;
 import com.lisap.equus.utils.RecyclerViewHolderListener;
 import com.lisap.equus.data.entities.Horse;
+import com.squareup.picasso.MemoryPolicy;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -28,16 +32,11 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainHolder> {
     public static class MainHolder extends RecyclerView.ViewHolder{
         ImageView photo;
         TextView name;
-        TextView proprietaire;
-        TextView telProprietaire;
-
 
         public MainHolder(View view){
             super(view);
             photo = view.findViewById(R.id.activity_main_item_photo);
             name = view.findViewById(R.id.activity_main_item_name);
-            proprietaire = view.findViewById(R.id.activity_horse_details_proprietaire);
-            telProprietaire = view.findViewById(R.id.activity_horse_details_numTel);
         }
     }
 
@@ -50,23 +49,34 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainHolder> {
 
     @Override
     public void onBindViewHolder(final MainHolder holder, final int position) {
-
         //position liée à la ligne donc change toute seule//
         final Horse horse = horseList.get(position);
 
         holder.name.setText(horse.getName());
-        Picasso.get().load(horse.getImageUrl()).into(holder.photo);
+        Picasso.get().load(
+                Constants.START_URL +
+                horse.getHorseId() +
+                        Constants.END_URL
+        ).networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE).into(holder.photo);
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                listener.onItemClicked(holder,horse,position);
-            }
+        holder.itemView.setOnClickListener(view -> {
+            listener.onItemClicked(holder, horse, position);
+        });
+
+        holder.itemView.setOnLongClickListener(view -> {
+            listener.onItemLongClicked(holder, horse, position);
+            return true;
         });
     }
+
     @Override
     public int getItemCount(){
         return horseList.size();
+    }
+
+    public void setData(List<Horse> horseList) {
+        this.horseList = horseList;
+        notifyDataSetChanged();
     }
 }
 

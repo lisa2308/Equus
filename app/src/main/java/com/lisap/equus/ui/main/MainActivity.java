@@ -5,27 +5,32 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.flatdialoglibrary.dialog.FlatDialog;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.lisap.equus.data.entities.Horse;
 import com.lisap.equus.R;
-import com.lisap.equus.data.entities.Note;
+import com.lisap.equus.data.firestore.DbHorse;
+import com.lisap.equus.data.firestore.DbOwner;
+import com.lisap.equus.databinding.ActivityMainBinding;
 import com.lisap.equus.ui.login.LoginActivity;
-import com.lisap.equus.ui.main.navdrawer.notes.NoteListActivity;
+import com.lisap.equus.ui.main.addupdatehorse.AddUpdateHorseActivity;
+import com.lisap.equus.ui.main.details.HorseDetailsActivity;
+import com.lisap.equus.ui.main.notes.NoteListActivity;
 import com.lisap.equus.ui.main.navdrawer.owner.OwnerListActivity;
 import com.lisap.equus.utils.RecyclerViewHolderListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
-import com.lisap.equus.ui.activities.HorsedetailsActivity;
 import com.lisap.equus.utils.SharedPreferencesManager;
 
 import java.util.ArrayList;
@@ -35,51 +40,107 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener,
         NavigationView.OnNavigationItemSelectedListener {
 
-    RecyclerView recyclerView;
+    private ActivityMainBinding binding;
     private MainAdapter mainAdapter;
-    Toolbar toolbar;
-    DrawerLayout drawerLayout;
-    NavigationView mNavigationView;
-    BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        recyclerView = findViewById(R.id.activity_main_recycler_view);
-        toolbar = findViewById(R.id.activity_main_toolbar);
-        mNavigationView = findViewById(R.id.activity_main_nav_view);
-        drawerLayout = findViewById(R.id.activity_main_drawer_layout);
-        bottomNavigationView = findViewById(R.id.activity_main_bottom_navigation);
+
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+        setContentView(view);
+
         setUpToolbar();
         setUpBottomNavigationView();
         initRecycler();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadRecyclerData();
+    }
+
     public void initRecycler(){
-        List<Horse> horseList = new ArrayList<>();
-        //horseList.add(new Horse("https://i.ytimg.com/vi/-ql6xV-iTKc/maxresdefault.jpg", "Marco","Manon Breillet","0450251474"));
-        //horseList.add(new Horse("https://i.ytimg.com/vi/-ql6xV-iTKc/maxresdefault.jpg", "Capri","Marie Ouannes","0625272824"));
-        //ASSOCIATE ADAPTER WITH RECYCLER//
-        mainAdapter = new MainAdapter(horseList, listener);
-        recyclerView.setAdapter(mainAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.addItemDecoration(new DividerItemDecoration(MainActivity.this,DividerItemDecoration.VERTICAL));
+        RecyclerViewHolderListener listener = new RecyclerViewHolderListener() {
+            @Override
+            public void onItemClicked(RecyclerView.ViewHolder viewHolder, Object item, int pos) {
+                Horse horse = (Horse) item;
+                Intent i = new Intent(MainActivity.this, HorseDetailsActivity.class);
+                i.putExtra("horse", horse);
+                startActivity(i);
+            }
+
+            @Override
+            public void onItemLongClicked(RecyclerView.ViewHolder viewHolder, Object item, int pos) {
+                Horse horse = (Horse) item;
+
+                final FlatDialog flatDialog = new FlatDialog(MainActivity.this);
+                flatDialog.setTitle("Options")
+                    .setFirstButtonText("MODIFIER")
+                    .setSecondButtonText("SUPPRIMER")
+                    .isCancelable(true)
+                    .withFirstButtonListner(view -> {
+                        startAddHorseActivity(horse);
+                        flatDialog.dismiss();
+                    })
+                    .withSecondButtonListner(view -> {
+                        DbOwner.deleteOwnerDocument(
+                                SharedPreferencesManager.getStable(MainActivity.this).getIdStable(),
+                                horse.getHorseId()
+                        ).addOnSuccessListener(documentReference -> {
+                            Toast.makeText(MainActivity.this, "Cheval supprimé", Toast.LENGTH_LONG).show();
+                        }).addOnFailureListener(e -> {
+                            Toast.makeText(MainActivity.this, "Une erreur s'est produite", Toast.LENGTH_LONG).show();
+                        });
+                        loadRecyclerData();
+                        flatDialog.dismiss();
+                    })
+                    .show();
+            }
+        };
+
+        mainAdapter = new MainAdapter(new ArrayList<>(), listener);
+        binding.activityMainRecyclerView.setAdapter(mainAdapter);
+        binding.activityMainRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        binding.activityMainRecyclerView.addItemDecoration(new DividerItemDecoration(MainActivity.this,DividerItemDecoration.VERTICAL));
+    }
+
+    private void loadRecyclerData() {
+        DbHorse.getHorseDocumentList(SharedPreferencesManager.getStable(this).getIdStable())
+            .addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    List<Horse> horseList = new ArrayList<>();
+                    for (DocumentSnapshot document : task.getResult()) {
+                        String uid = document.getId();
+                        if (uid == null)
+                            return;
+
+                        Horse horse = document.toObject(Horse.class);
+                        // add uid to note object
+                        horse.setHorseId(uid);
+                        horseList.add(horse);
+                    }
+                    mainAdapter.setData(horseList);
+                } else {
+                    Toast.makeText(this, "Une erreur s'est produite", Toast.LENGTH_LONG).show();
+                }
+            });
     }
 
     public void setUpToolbar() {
-        toolbar.setTitleTextColor(ContextCompat.getColor(this, R.color.colorAccentLight));
-        setSupportActionBar(toolbar);
+        binding.activityMainToolbar.setTitleTextColor(ContextCompat.getColor(this, R.color.colorAccentLight));
+        setSupportActionBar(binding.activityMainToolbar);
         ActionBar actionbar = getSupportActionBar();
         getSupportActionBar().setTitle("Equus");
         actionbar.setDisplayHomeAsUpEnabled(true);
         actionbar.setHomeAsUpIndicator(R.drawable.ic_menu);
-        mNavigationView.setNavigationItemSelectedListener(this);
-
+        binding.activityMainNavView.setNavigationItemSelectedListener(this);
     }
 
     public void setUpBottomNavigationView(){
-        bottomNavigationView.setOnNavigationItemSelectedListener(this);
+        binding.activityMainBottomNavigation.setOnNavigationItemSelectedListener(this);
     }
 
     @Override
@@ -88,21 +149,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         inflater.inflate(R.menu.activity_main_menu, menu);
         return true;
     }
-
-    RecyclerViewHolderListener listener = new RecyclerViewHolderListener() {
-        @Override
-        public void onItemClicked(RecyclerView.ViewHolder viewHolder, Object item, int pos) {
-            Horse h = (Horse) item;
-            Intent i = new Intent(MainActivity.this, HorsedetailsActivity.class);
-            i.putExtra("name", h.getName());
-//            i.putExtra("proprietaire", h.getOwner());
-//            i.putExtra("telproprio", h.getOwnerPhone());
-            startActivity(i);
-        }
-
-        @Override
-        public void onItemLongClicked(RecyclerView.ViewHolder viewHolder, Object item, int pos) {}
-    };
 
     @Override
     public boolean onNavigationItemSelected(MenuItem menuItem) {
@@ -113,6 +159,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             case R.id.activity_main_drawer_logout:
                 SharedPreferencesManager.putStable(this, null);
                 startLoginActivity();
+                break;
+            case R.id.bottom_main_add_horse:
+                startAddHorseActivity(null);
                 break;
         }
 
@@ -128,11 +177,17 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 startNoteListActivity();
                 return true;
             case android.R.id.home:
-                drawerLayout.openDrawer(GravityCompat.START);
+                binding.activityMainDrawerLayout.openDrawer(GravityCompat.START);
                 return true;
             default:
                 return true;
         }
+    }
+
+    private void startAddHorseActivity(Horse horse) {
+        Intent intent = new Intent(this, AddUpdateHorseActivity.class);
+        intent.putExtra("horse", horse);
+        startActivity(intent);
     }
 
     private void startNoteListActivity() {

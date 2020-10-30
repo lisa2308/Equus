@@ -1,11 +1,25 @@
 package com.lisap.equus.data.entities;
 
-public class Horse {
+import com.google.firebase.firestore.Exclude;
+
+import java.io.Serializable;
+
+public class Horse implements Serializable {
+    @Exclude
+    private String horseId;
     private String name;
-    private String imageUrl;
     private boolean isStopped;
+    private String ownerId;
 
     public Horse() {}
+
+    public String getHorseId() {
+        return horseId;
+    }
+
+    public void setHorseId(String horseId) {
+        this.horseId = horseId;
+    }
 
     public String getName() {
         return name;
@@ -13,14 +27,6 @@ public class Horse {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
     }
 
     public boolean isStopped() {
@@ -31,12 +37,21 @@ public class Horse {
         isStopped = stopped;
     }
 
+    public String getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(String ownerId) {
+        this.ownerId = ownerId;
+    }
+
     @Override
     public String toString() {
         return "Horse{" +
+                "horseId='" + horseId + '\'' +
                 ", name='" + name + '\'' +
-                ", imageUrl='" + imageUrl + '\'' +
                 ", isStopped=" + isStopped +
+                ", ownerId='" + ownerId + '\'' +
                 '}';
     }
 }
