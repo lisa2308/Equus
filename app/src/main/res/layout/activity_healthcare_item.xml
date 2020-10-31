@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_healthcare_item_layout"
+    android:layout_width="match_parent"
+    android:layout_height="110dp"
+    android:orientation="horizontal">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        android:background="@drawable/custom_background_square"
+        android:layout_margin="30dp">
+
+        <ImageView
+            android:id="@+id/activity_healthcare_item_icon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="19dp"
+            android:src="@drawable/ic_horseshoe"
+            android:layout_gravity="center_vertical">
+        </ImageView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="200dp"
+        android:layout_height="30dp"
+        android:background="@drawable/custom_background_square"
+        android:layout_gravity="center">
+
+    <TextView
+        android:id="@+id/activity_healthcare_item_horse_name"
+        android:layout_width="200dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="50dp"
+        android:textStyle="bold"
+        android:layout_marginTop="3dp"
+        android:text="NOM DU CHEVAL"
+        android:textColor="@color/colorAccent">
+
+    </TextView>
+</LinearLayout>
+
+</LinearLayout>

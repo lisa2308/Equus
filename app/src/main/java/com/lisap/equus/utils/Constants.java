@@ -13,6 +13,8 @@ public class Constants {
     public static final String FIREBASE_COLLECTION_NAME_HORSES = "horses";
     public static final String FIREBASE_COLLECTION_NAME_OWNERS = "owners";
     public static final String FIREBASE_COLLECTION_NAME_NOTES = "notes";
+    public static final String FIREBASE_COLLECTION_NAME_CARE = "care";
+
 
     // FIREBASE STORAGE
     public static final String START_URL = "https://firebasestorage.googleapis.com/v0/b/equus-96452.appspot.com/o/";
