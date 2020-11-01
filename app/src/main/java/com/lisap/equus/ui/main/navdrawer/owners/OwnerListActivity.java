@@ -1,4 +1,4 @@
-package com.lisap.equus.ui.main.navdrawer.owner;
+package com.lisap.equus.ui.main.navdrawer.owners;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -7,24 +7,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.flatdialoglibrary.dialog.FlatDialog;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.lisap.equus.R;
 import com.lisap.equus.data.entities.Owner;
-import com.lisap.equus.data.entities.Stable;
 import com.lisap.equus.data.firestore.DbOwner;
-import com.lisap.equus.databinding.ActivityLoginBinding;
 import com.lisap.equus.databinding.ActivityOwnerListBinding;
-import com.lisap.equus.ui.login.LoginActivity;
-import com.lisap.equus.ui.main.navdrawer.owner.addupdate.OwnerAddUpdateActivity;
+import com.lisap.equus.ui.main.navdrawer.owners.addupdate.OwnerAddUpdateActivity;
 import com.lisap.equus.utils.RecyclerViewHolderListener;
 import com.lisap.equus.utils.SharedPreferencesManager;
 

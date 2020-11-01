@@ -28,24 +28,33 @@
         <activity
             android:name=".ui.main.MainActivity"
             android:theme="@style/NoActionBarTheme"/>
+        <activity android:name=".ui.main.details.HorseDetailsActivity"
+            android:theme="@style/NoActionBarThemeDark"
+            android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".ui.main.addupdatehorse.AddUpdateHorseActivity"
             android:parentActivityName=".ui.main.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.main.MainActivity" />
         </activity>
-        <activity android:name=".ui.main.navdrawer.owner.OwnerListActivity"
+        <activity android:name=".ui.main.navdrawer.healthcares.HealthCareListActivity"
             android:parentActivityName=".ui.main.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.main.MainActivity" />
         </activity>
-        <activity android:name=".ui.main.navdrawer.owner.addupdate.OwnerAddUpdateActivity"
-            android:parentActivityName=".ui.main.navdrawer.owner.OwnerListActivity"
+        <activity android:name=".ui.main.navdrawer.owners.OwnerListActivity"
+            android:parentActivityName=".ui.main.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.main.MainActivity" />
+        </activity>
+        <activity android:name=".ui.main.navdrawer.owners.addupdate.OwnerAddUpdateActivity"
+            android:parentActivityName=".ui.main.navdrawer.owners.OwnerListActivity"
             android:theme="@style/AppThemeDark">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.main.navdrawer.owner.OwnerListActivity" />
+                android:value=".ui.main.navdrawer.owners.OwnerListActivity" />
         </activity>
         <activity android:name=".ui.main.notes.NoteListActivity"
             android:parentActivityName=".ui.main.MainActivity">

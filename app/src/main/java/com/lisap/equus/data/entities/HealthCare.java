@@ -5,18 +5,21 @@ import com.google.firebase.firestore.Exclude;
 import java.io.Serializable;
 
 public class HealthCare implements Serializable {
-    @Exclude
-    private String healthcareId;
+
+    private String healthCareId;
     private String horseId;
     private String problem;
     private String specialist;
 
-    public String getHealthcareId() {
-        return healthcareId;
+    public HealthCare() {}
+
+    @Exclude
+    public String getHealthCareId() {
+        return healthCareId;
     }
 
-    public void setHealthcareId(String healthcareId) {
-        this.healthcareId = healthcareId;
+    public void setHealthCareId(String healthCareId) {
+        this.healthCareId = healthCareId;
     }
 
     public String getHorseId() {

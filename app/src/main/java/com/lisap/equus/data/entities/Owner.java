@@ -7,7 +7,6 @@ import com.google.firebase.firestore.Exclude;
 import java.io.Serializable;
 
 public class Owner implements Serializable {
-    @Exclude
     private String ownerId;
     private String lastname;
     private String firstname;
@@ -15,6 +14,7 @@ public class Owner implements Serializable {
 
     public Owner() {}
 
+    @Exclude
     public String getOwnerId() {
         return ownerId;
     }

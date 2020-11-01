@@ -13,7 +13,7 @@ public class Constants {
     public static final String FIREBASE_COLLECTION_NAME_HORSES = "horses";
     public static final String FIREBASE_COLLECTION_NAME_OWNERS = "owners";
     public static final String FIREBASE_COLLECTION_NAME_NOTES = "notes";
-    public static final String FIREBASE_COLLECTION_NAME_CARE = "care";
+    public static final String FIREBASE_COLLECTION_NAME_CARES = "cares";
 
 
     // FIREBASE STORAGE

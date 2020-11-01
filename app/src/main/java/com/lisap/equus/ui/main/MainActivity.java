@@ -21,13 +21,13 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.lisap.equus.data.entities.Horse;
 import com.lisap.equus.R;
 import com.lisap.equus.data.firestore.DbHorse;
-import com.lisap.equus.data.firestore.DbOwner;
 import com.lisap.equus.databinding.ActivityMainBinding;
 import com.lisap.equus.ui.login.LoginActivity;
 import com.lisap.equus.ui.main.addupdatehorse.AddUpdateHorseActivity;
 import com.lisap.equus.ui.main.details.HorseDetailsActivity;
+import com.lisap.equus.ui.main.navdrawer.healthcares.HealthCareListActivity;
 import com.lisap.equus.ui.main.notes.NoteListActivity;
-import com.lisap.equus.ui.main.navdrawer.owner.OwnerListActivity;
+import com.lisap.equus.ui.main.navdrawer.owners.OwnerListActivity;
 import com.lisap.equus.utils.RecyclerViewHolderListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                         flatDialog.dismiss();
                     })
                     .withSecondButtonListner(view -> {
-                        DbOwner.deleteOwnerDocument(
+                        DbHorse.deleteHorseDocument(
                                 SharedPreferencesManager.getStable(MainActivity.this).getIdStable(),
                                 horse.getHorseId()
                         ).addOnSuccessListener(documentReference -> {
@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         mainAdapter = new MainAdapter(new ArrayList<>(), listener);
         binding.activityMainRecyclerView.setAdapter(mainAdapter);
         binding.activityMainRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        binding.activityMainRecyclerView.addItemDecoration(new DividerItemDecoration(MainActivity.this,DividerItemDecoration.VERTICAL));
+        binding.activityMainRecyclerView.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
     }
 
     private void loadRecyclerData() {
@@ -153,6 +153,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     @Override
     public boolean onNavigationItemSelected(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
+            case R.id.activity_main_drawer_recap:
+                startHealthCareListActivity();
+                break;
             case R.id.activity_main_drawer_owners:
                 startOwnerListActivity();
                 break;
@@ -182,6 +185,10 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             default:
                 return true;
         }
+    }
+
+    private void startHealthCareListActivity() {
+        startActivity(new Intent(this, HealthCareListActivity.class));
     }
 
     private void startAddHorseActivity(Horse horse) {

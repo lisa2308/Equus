@@ -1,21 +1,16 @@
-package com.lisap.equus.ui.main.navdrawer.owner.addupdate;
+package com.lisap.equus.ui.main.navdrawer.owners.addupdate;
 
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.DocumentReference;
 import com.lisap.equus.R;
 import com.lisap.equus.data.entities.Owner;
 import com.lisap.equus.data.firestore.DbOwner;
 import com.lisap.equus.databinding.ActivityOwnerAddUpdateBinding;
-import com.lisap.equus.databinding.ActivityOwnerListBinding;
 import com.lisap.equus.utils.SharedPreferencesManager;
 
 public class OwnerAddUpdateActivity extends AppCompatActivity {

@@ -5,13 +5,13 @@ import com.google.firebase.firestore.Exclude;
 import java.io.Serializable;
 
 public class Note implements Serializable {
-    @Exclude
     private String noteId;
     private String date;
     private String message;
 
     public Note() {}
 
+    @Exclude
     public String getNoteId() {
         return noteId;
     }
@@ -42,6 +42,6 @@ public class Note implements Serializable {
                 ", date='" + date + '\'' +
                 ", message='" + message + '\'' +
                 '}';
-}
-
     }
+
+}

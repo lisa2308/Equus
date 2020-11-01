@@ -5,7 +5,6 @@ import com.google.firebase.firestore.Exclude;
 import java.io.Serializable;
 
 public class Horse implements Serializable {
-    @Exclude
     private String horseId;
     private String name;
     private boolean isStopped;
@@ -13,6 +12,7 @@ public class Horse implements Serializable {
 
     public Horse() {}
 
+    @Exclude
     public String getHorseId() {
         return horseId;
     }

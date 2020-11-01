@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -18,40 +18,21 @@
             android:src="@drawable/horseface"
             android:scaleType="centerCrop" />
 
-        <View
-            android:id="@+id/activity_horse_details_body"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/activity_horse_details_photo" />
-
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/activity_horse_details_fab_stopped"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_alignBottom="@id/activity_horse_details_photo"
             android:layout_marginBottom="-28dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginEnd="20dp"
             android:src="@drawable/ic_block_white_18dp"
             app:backgroundTint="@color/colorAccentLight"
             android:tint="@color/colorAccent"
             tools:ignore="RelativeOverlap" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/activity_horse_details_fab_edit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignBottom="@id/activity_horse_details_photo"
-            android:layout_marginBottom="-28dp"
-            android:layout_marginRight="90dp"
-            android:src="@drawable/ic_edit"
-            app:backgroundTint="@color/colorAccentLight"
-            android:tint="@color/colorAccent"
-            tools:ignore="RelativeOverlap" />
-
         <RelativeLayout
-            android:id="@+id/activity_horse_details_layout"
+            android:id="@+id/activity_horse_details_relative_name"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:background="@drawable/my_gradient_drawable"
@@ -64,7 +45,7 @@
                 android:layout_marginTop="10dp">
 
                 <TextView
-                    android:id="@+id/activity_horse_details_name"
+                    android:id="@+id/activity_horse_details_txt_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Nom du poney"
@@ -80,17 +61,15 @@
         </RelativeLayout>
 
         <LinearLayout
-            android:id="@+id/activity_horse_details_presentation"
+            android:id="@+id/activity_horse_details_relative_presentation"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginLeft="20dp"
-            android:layout_below="@id/activity_horse_details_layout"
-            android:layout_marginTop="25dp"
-            android:layout_marginRight="20dp">
+            android:padding="20dp"
+            android:layout_below="@id/activity_horse_details_relative_name">
 
             <TextView
-                android:id="@+id/activity_horse_details_owner"
+                android:id="@+id/activity_horse_details_owner_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Propriétaire "
@@ -102,7 +81,7 @@
                 android:textColor="@color/colorAccent" />
 
             <TextView
-                android:id="@+id/activity_horse_details_tel"
+                android:id="@+id/activity_horse_details_owner_tel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/ic_smartphone"
@@ -114,57 +93,76 @@
                 android:textColor="@color/colorAccent"/>
         </LinearLayout>
 
-    <RelativeLayout
-        android:id="@+id/activity_horse_details_recycler"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_below="@+id/activity_horse_details_presentation">
-
-    <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/activity_main_recycler_view_incident"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </RelativeLayout>
+            android:layout_height="200dp"
+            android:layout_below="@id/activity_horse_details_relative_presentation"
+            android:layout_above="@id/activity_horse_details_relative_care">
+
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/activity_horse_details_recycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+        </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/activity_horse_details_care"
+            android:id="@+id/activity_horse_details_relative_care"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/activity_horse_details_recycler">
+            android:layout_alignParentBottom="true">
 
-            <Spinner
-                android:id="@+id/activity_horse_details_care_spinner"
-                android:layout_width="150dp"
-                android:layout_height="50dp"
-                android:backgroundTint="@android:color/black"
-                android:entries="@array/spinnerItems"
-                android:layout_marginLeft="20dp">
-            </Spinner>
-
-            <EditText
-                android:id="@+id/activity_horse_details_text"
-                android:layout_width="200dp"
-                android:layout_height="50dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="5dp"
-                android:backgroundTint="@android:color/black"
-                android:layout_toRightOf="@+id/activity_horse_details_care_spinner">
-
-            </EditText>
-            <Button
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                android:layout_marginLeft="20dp"
-                android:textColor="@color/colorAccentLight"
-                android:textStyle="bold"
-                android:background="@drawable/my_gradient_drawable"
-                android:text="Valider"
-                android:layout_marginBottom="30dp"
-                android:layout_below="@id/activity_horse_details_text">
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+                <RelativeLayout
+                    android:id="@+id/activity_horse_details_spinner_relative"
+                    android:layout_width="140dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="10dp">
 
-            </Button>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="51dp"
+                        android:background="@drawable/custom_spinner"/>
+
+                    <Spinner
+                        android:id="@+id/activity_horse_details_spinner"
+                        android:layout_width="140dp"
+                        android:layout_height="50dp"
+                        android:textSize="12sp"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        android:layout_margin="1dp"
+                        android:backgroundTint="@color/colorPrimary"
+                        android:entries="@array/spinnerItems"/>
+                </RelativeLayout>
+
+                <EditText
+                    android:id="@+id/activity_horse_details_edit_problem"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@android:color/black">
+                </EditText>
+
+                <ProgressBar
+                    android:id="@+id/activity_horse_details_care_progress"
+                    style="?android:progressBarStyle"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_margin="10dp"
+                    android:visibility="gone"
+                    android:indeterminateTint="@color/colorPrimary"/>
+
+                <ImageView
+                    android:id="@+id/activity_horse_details_care_btn_add"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_margin="10dp"
+                    android:src="@drawable/ic_check_circle_outline_24px"/>
+            </LinearLayout>
         </RelativeLayout>
     </RelativeLayout>
-
-</ScrollView>
+</RelativeLayout>

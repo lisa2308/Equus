@@ -132,6 +132,16 @@ public class AddUpdateHorseActivity extends AppCompatActivity {
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {}
         });
+
+        if (extraHorse != null) {
+            for (Owner ow : ownerList) {
+                if (ow.getOwnerId() == null)
+                    continue;
+                if (ow.getOwnerId().equals(extraHorse.getOwnerId())) {
+                    binding.activityHorseAddUpdateSpinner.setSelection(ownerList.indexOf(ow));
+                }
+            }
+        }
     }
 
     private void showOwnerListProgress() {
@@ -196,8 +206,8 @@ public class AddUpdateHorseActivity extends AppCompatActivity {
                 }
                 // update
                 else {
-                    // todo make edit
                     extraHorse.setName(name);
+                    extraHorse.setOwnerId(ownerId);
 
                     DbHorse.updateHorseDocument(
                             SharedPreferencesManager.getStable(this).getIdStable(), extraHorse
