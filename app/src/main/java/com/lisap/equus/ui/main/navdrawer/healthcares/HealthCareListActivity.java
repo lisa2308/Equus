@@ -49,7 +49,7 @@ public class HealthCareListActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
 
-        setTitle("Chevaux à soigner");
+        setTitle("Soins des chevaux");
 
         initRecycler();
     }

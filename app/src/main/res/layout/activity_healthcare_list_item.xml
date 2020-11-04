@@ -17,8 +17,8 @@
             android:id="@+id/activity_healthcare_list_item_icon"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_margin="19dp"
-            android:src="@drawable/ic_horseshoe"
+            android:layout_margin="20dp"
+            android:src="@drawable/ic_horse_care_recap"
             android:layout_gravity="center_vertical">
         </ImageView>
     </LinearLayout>

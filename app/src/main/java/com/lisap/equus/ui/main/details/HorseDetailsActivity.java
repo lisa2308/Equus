@@ -2,12 +2,14 @@ package com.lisap.equus.ui.main.details;
 
 import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -129,6 +131,7 @@ public class HorseDetailsActivity extends AppCompatActivity {
             @Override
             public void onItemClicked(RecyclerView.ViewHolder viewHolder, Object item, int pos) {}
 
+            @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onItemLongClicked(RecyclerView.ViewHolder viewHolder, Object item, int pos) {
                 HealthCare healthCare = (HealthCare) item;
@@ -136,6 +139,10 @@ public class HorseDetailsActivity extends AppCompatActivity {
                 final FlatDialog flatDialog = new FlatDialog(HorseDetailsActivity.this);
                 flatDialog.setTitle("Options")
                     .setFirstButtonText("SUPPRIMER")
+                        .setBackgroundColor(getColor(R.color.colorAccentLight))
+                        .setFirstButtonColor(getColor(R.color.colorPrimaryLight))
+                        .setSecondButtonColor(getColor(R.color.colordelete))
+                        .setTitleColor(getColor(R.color.colorPrimaryDark))
                     .isCancelable(true)
                     .withFirstButtonListner(view -> {
                         DbHealthCare.deleteHealthCareDocument(
@@ -143,7 +150,7 @@ public class HorseDetailsActivity extends AppCompatActivity {
                                 extraHorse.getHorseId(),
                                 healthCare.getHealthCareId()
                         ).addOnSuccessListener(documentReference -> {
-                            Toast.makeText(HorseDetailsActivity.this, "Health care supprimé", Toast.LENGTH_LONG).show();
+                            Toast.makeText(HorseDetailsActivity.this, "Soin supprimé", Toast.LENGTH_LONG).show();
                         }).addOnFailureListener(e -> {
                             Toast.makeText(HorseDetailsActivity.this, "Une erreur s'est produite", Toast.LENGTH_LONG).show();
                         });

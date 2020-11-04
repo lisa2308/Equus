@@ -1,11 +1,13 @@
 package com.lisap.equus.ui.main.notes;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -56,12 +58,17 @@ public class NoteListActivity extends AppCompatActivity {
                 Note note = (Note) item;
             }
 
+            @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onItemLongClicked(RecyclerView.ViewHolder viewHolder, Object item, int pos) {
                 Note note = (Note) item;
 
                 final FlatDialog flatDialog = new FlatDialog(NoteListActivity.this);
                 flatDialog.setTitle("Options")
+                        .setBackgroundColor(getColor(R.color.colorAccentLight))
+                        .setFirstButtonColor(getColor(R.color.colorPrimaryLight))
+                        .setSecondButtonColor(getColor(R.color.colordelete))
+                        .setTitleColor(getColor(R.color.colorPrimaryDark))
                         .setFirstButtonText("MODIFIER")
                         .setSecondButtonText("SUPPRIMER")
                         .isCancelable(true)

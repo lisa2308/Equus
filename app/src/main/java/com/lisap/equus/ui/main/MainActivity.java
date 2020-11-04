@@ -1,6 +1,7 @@
 package com.lisap.equus.ui.main;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -8,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -72,6 +74,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 startActivity(i);
             }
 
+            @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onItemLongClicked(RecyclerView.ViewHolder viewHolder, Object item, int pos) {
                 Horse horse = (Horse) item;
@@ -80,6 +83,10 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 flatDialog.setTitle("Options")
                     .setFirstButtonText("MODIFIER")
                     .setSecondButtonText("SUPPRIMER")
+                        .setBackgroundColor(getColor(R.color.colorAccentLight))
+                        .setFirstButtonColor(getColor(R.color.colorPrimaryLight))
+                        .setSecondButtonColor(getColor(R.color.colordelete))
+                        .setTitleColor(getColor(R.color.colorPrimaryDark))
                     .isCancelable(true)
                     .withFirstButtonListner(view -> {
                         startAddHorseActivity(horse);

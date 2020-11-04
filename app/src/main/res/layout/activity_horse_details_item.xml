@@ -9,13 +9,16 @@
         android:layout_width="130dp"
         android:layout_height="match_parent"
         android:text="Maréchal"
-        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimary"
+        android:textSize="14sp"
         android:gravity="center"/>
 
     <TextView
         android:id="@+id/activity_horse_details_item_txt_problem"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:textColor="@color/colorPrimaryLight"
         android:text="Parer les antérieurs"
         android:textSize="14sp"
         android:gravity="center"/>
