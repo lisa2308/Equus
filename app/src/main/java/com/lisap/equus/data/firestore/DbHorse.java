@@ -5,9 +5,11 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.lisap.equus.data.entities.Horse;
 import com.lisap.equus.data.entities.Owner;
+import com.lisap.equus.utils.Utils;
 
 import static com.lisap.equus.utils.Constants.FIREBASE_COLLECTION_NAME_HORSES;
 import static com.lisap.equus.utils.Constants.FIREBASE_COLLECTION_NAME_STABLES;
@@ -24,7 +26,16 @@ public class DbHorse {
 
     // --- GET ---
     public static Task<QuerySnapshot> getHorseDocumentList(String stableDocumentId) {
-        return getHorseCollection(stableDocumentId).get();
+        return getHorseCollection(stableDocumentId).orderBy("name").get();
+    }
+
+    public static Task<QuerySnapshot> getHorseDocumentListSearch(String stableDocumentId, String query) {
+        if (query.isEmpty()) {
+            return getHorseDocumentList(stableDocumentId);
+        } else {
+            query = Utils.capitalize(query);
+            return getHorseCollection(stableDocumentId).orderBy("name").startAt(query).endAt(query+'\uf8ff').get();
+        }
     }
 
     public static Task<DocumentSnapshot> getHorseDocument(String stableDocumentId, String horseDocumentId) {

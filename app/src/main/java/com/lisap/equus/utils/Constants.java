@@ -20,7 +20,4 @@ public class Constants {
     public static final String START_URL = "https://firebasestorage.googleapis.com/v0/b/equus-96452.appspot.com/o/";
     public static final String END_URL = "?alt=media";
 
-//    public static final String FIREBASE_HORSE_COLUMN_OWNER = "owner";
-//    public static final String FIREBASE_HORSE_COLUMN_OWNER_PHONE = "ownerPhone";
-
 }

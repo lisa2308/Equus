@@ -30,6 +30,7 @@ import com.lisap.equus.data.firestore.DbOwner;
 import com.lisap.equus.databinding.ActivityHorseAddUpdateBinding;
 import com.lisap.equus.utils.Constants;
 import com.lisap.equus.utils.SharedPreferencesManager;
+import com.lisap.equus.utils.Utils;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -180,7 +181,7 @@ public class AddUpdateHorseActivity extends AppCompatActivity {
 
                     // create new horse object
                     Horse horse = new Horse();
-                    horse.setName(name);
+                    horse.setName(Utils.capitalize(name));
                     horse.setStopped(false);
                     horse.setOwnerId(ownerId);
 
@@ -206,7 +207,7 @@ public class AddUpdateHorseActivity extends AppCompatActivity {
                 }
                 // update
                 else {
-                    extraHorse.setName(name);
+                    extraHorse.setName(Utils.capitalize(name));
                     extraHorse.setOwnerId(ownerId);
 
                     DbHorse.updateHorseDocument(
@@ -221,6 +222,14 @@ public class AddUpdateHorseActivity extends AppCompatActivity {
                             // upload file
                             FirebaseStorage.getInstance().getReference(horseId).putFile(file).addOnSuccessListener(taskSnapshot -> {
                                 hideBtnLoading();
+
+                                // invalidate cache for image
+                                Picasso.get().invalidate(
+                                    Constants.START_URL +
+                                            horseId +
+                                            Constants.END_URL
+                                );
+
                                 Toast.makeText(this, "Cheval modifié", Toast.LENGTH_LONG).show();
                                 onBackPressed();
                             }).addOnFailureListener(exception -> {

@@ -57,7 +57,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainHolder> {
                 Constants.START_URL +
                 horse.getHorseId() +
                         Constants.END_URL
-        ).networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE).into(holder.photo);
+        ).into(holder.photo);
 
         if (horse.isStopped()) {
             holder.photo.setAlpha(0.3f);

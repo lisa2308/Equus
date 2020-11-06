@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/menu_note"
-        android:title="search"
+        android:title="note"
         android:icon="@drawable/ic_mes_notes"
         app:showAsAction="always"/>
 

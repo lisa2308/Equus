@@ -22,6 +22,11 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+            buildConfigField 'String', "Salt", salt
+        }
+        debug {
+            buildConfigField 'String', "Salt", salt
         }
     }
     buildFeatures {
@@ -49,6 +54,8 @@ dependencies {
     implementation 'com.karumi:dexter:6.2.0'
     implementation 'com.github.esafirm.android-image-picker:imagepicker:2.3.1'
     implementation 'com.github.esafirm.android-image-picker:rximagepicker:2.3.1'
+    implementation 'com.github.Ferfalk:SimpleSearchView:0.1.6'
+    implementation 'com.lambdapioneer.argon2kt:argon2kt:1.1.0'
 }
 
 apply plugin: 'com.google.gms.google-services'

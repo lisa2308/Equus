@@ -8,15 +8,25 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:layout_marginLeft="40dp"
+        android:layout_gravity="center"
         android:gravity="center"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="40dp"
         android:text="Equus"
-        android:paddingTop="20dp"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="70sp"
-        android:textStyle="bold"
-        />
+        android:textSize="60sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/activity_nav_drawer_header_txt_stable_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="Centre équestre test es tes tes "
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="24sp"/>
 
 </LinearLayout>

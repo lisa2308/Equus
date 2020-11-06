@@ -6,8 +6,7 @@ import java.util.List;
 
 public class Stable {
     private String idStable;
-    private String name;
-    private String accessCode;
+    private String stableName;
 
     public Stable() {}
 
@@ -20,28 +19,19 @@ public class Stable {
         this.idStable = idStable;
     }
 
-    public String getName() {
-        return name;
+    public String getStableName() {
+        return stableName;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getAccessCode() {
-        return accessCode;
-    }
-
-    public void setAccessCode(String accessCode) {
-        this.accessCode = accessCode;
+    public void setStableName(String stableName) {
+        this.stableName = stableName;
     }
 
     @Override
     public String toString() {
         return "Stable{" +
                 "idStable='" + idStable + '\'' +
-                ", name='" + name + '\'' +
-                ", accessCode='" + accessCode + '\'' +
+                ", stableName='" + stableName + '\'' +
                 '}';
     }
 }

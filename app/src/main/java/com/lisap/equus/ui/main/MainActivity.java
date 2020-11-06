@@ -3,10 +3,12 @@ package com.lisap.equus.ui.main;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
@@ -19,6 +21,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.flatdialoglibrary.dialog.FlatDialog;
+import com.ferfalk.simplesearchview.SimpleSearchView;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.lisap.equus.data.entities.Horse;
 import com.lisap.equus.R;
@@ -38,12 +41,12 @@ import com.lisap.equus.utils.SharedPreferencesManager;
 import java.util.ArrayList;
 import java.util.List;
 
-// todo : securiser password hash
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener,
         NavigationView.OnNavigationItemSelectedListener {
 
     private ActivityMainBinding binding;
     private MainAdapter mainAdapter;
+    private List<Horse> horseList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,15 +56,17 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         View view = binding.getRoot();
         setContentView(view);
 
-        setUpToolbar();
-        setUpBottomNavigationView();
+        setupToolbar();
+        setupBottomNavigationView();
         initRecycler();
+        setupSearch();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        loadRecyclerData();
+        binding.activityMainSearchView.closeSearch();
+        loadRecyclerData("");
     }
 
     public void initRecycler(){
@@ -101,59 +106,110 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                         }).addOnFailureListener(e -> {
                             Toast.makeText(MainActivity.this, "Une erreur s'est produite", Toast.LENGTH_LONG).show();
                         });
-                        loadRecyclerData();
+                        loadRecyclerData("");
                         flatDialog.dismiss();
                     })
                     .show();
             }
         };
 
-        mainAdapter = new MainAdapter(new ArrayList<>(), listener);
+        mainAdapter = new MainAdapter(horseList, listener);
         binding.activityMainRecyclerView.setAdapter(mainAdapter);
         binding.activityMainRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         binding.activityMainRecyclerView.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
     }
 
-    private void loadRecyclerData() {
-        DbHorse.getHorseDocumentList(SharedPreferencesManager.getStable(this).getIdStable())
-            .addOnCompleteListener(task -> {
-                if (task.isSuccessful()) {
-                    List<Horse> horseList = new ArrayList<>();
-                    for (DocumentSnapshot document : task.getResult()) {
-                        String uid = document.getId();
-                        if (uid == null)
-                            return;
+    private void loadRecyclerData(String query) {
+        DbHorse.getHorseDocumentListSearch(
+                SharedPreferencesManager.getStable(this).getIdStable(),
+                query
+        ).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
 
-                        Horse horse = document.toObject(Horse.class);
-                        // add uid to note object
-                        horse.setHorseId(uid);
-                        horseList.add(horse);
-                    }
-                    mainAdapter.setData(horseList);
-                } else {
-                    Toast.makeText(this, "Une erreur s'est produite", Toast.LENGTH_LONG).show();
+                // clear horse list
+                horseList.clear();
+
+                for (DocumentSnapshot document : task.getResult()) {
+                    String uid = document.getId();
+                    if (uid == null)
+                        return;
+
+                    Horse horse = document.toObject(Horse.class);
+                    // add uid to note object
+                    horse.setHorseId(uid);
+                    horseList.add(horse);
                 }
-            });
+                mainAdapter.notifyDataSetChanged();
+            } else {
+                Toast.makeText(this, "Une erreur s'est produite", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
-    public void setUpToolbar() {
+    public void setupToolbar() {
         binding.activityMainToolbar.setTitleTextColor(ContextCompat.getColor(this, R.color.colorAccentLight));
         setSupportActionBar(binding.activityMainToolbar);
         ActionBar actionbar = getSupportActionBar();
         getSupportActionBar().setTitle("Equus");
         actionbar.setDisplayHomeAsUpEnabled(true);
         actionbar.setHomeAsUpIndicator(R.drawable.ic_menu);
+
         binding.activityMainNavView.setNavigationItemSelectedListener(this);
+        TextView txtStableName = binding.activityMainNavView.getHeaderView(0).findViewById(R.id.activity_nav_drawer_header_txt_stable_name);
+        txtStableName.setText(SharedPreferencesManager.getStable(this).getStableName());
     }
 
-    public void setUpBottomNavigationView(){
+    public void setupBottomNavigationView(){
         binding.activityMainBottomNavigation.setOnNavigationItemSelectedListener(this);
+    }
+
+    private void setupSearch() {
+        binding.activityMainSearchView.setOnQueryTextListener(new SimpleSearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String query) {
+                Log.d("SimpleSearchView", "Text changed:" + query);
+                loadRecyclerData(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextCleared() {
+                Log.d("SimpleSearchView", "Text cleared");
+                return false;
+            }
+        });
+
+        binding.activityMainSearchView.setOnSearchViewListener(new SimpleSearchView.SearchViewListener() {
+            @Override
+            public void onSearchViewShown() {}
+
+            @Override
+            public void onSearchViewClosed() {
+                loadRecyclerData("");
+            }
+
+            @Override
+            public void onSearchViewShownAnimation() {}
+
+            @Override
+            public void onSearchViewClosedAnimation() {}
+        });
+
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.activity_main_menu, menu);
+
+        MenuItem item = menu.findItem(R.id.menu_search);
+        binding.activityMainSearchView.setMenuItem(item);
+
         return true;
     }
 
@@ -217,5 +273,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     }
 
     @Override
-    public void onBackPressed() {}
+    public void onBackPressed() {
+        if (binding.activityMainSearchView.onBackPressed()) {
+            return;
+        }
+    }
 }

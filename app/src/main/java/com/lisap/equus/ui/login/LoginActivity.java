@@ -38,58 +38,55 @@ public class LoginActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
 
-        binding.activityLoginBtnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View vi) {
+        binding.activityLoginBtnLogin.setOnClickListener(vi -> {
 
-                final View view = getLayoutInflater().inflate(R.layout.activity_login_dialog, null);
-                EditText editText = view.findViewById(R.id.activity_login_dialog_edit);
+            final View view1 = getLayoutInflater().inflate(R.layout.activity_login_dialog, null);
+            EditText editText = view1.findViewById(R.id.activity_login_dialog_edit);
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this, R.style.AlertDialogCustom);
-                builder.setTitle(getString(R.string.password));
-                builder.setMessage(getString(R.string.pleaseEnterPassword));
-                builder.setView(view);
-                builder.setPositiveButton(getString(R.string.ok), (dialog, whichButton) -> {});
-                builder.setNegativeButton(getString(R.string.cancel), (dialog, whichButton) -> dialog.dismiss());
+            AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this, R.style.AlertDialogCustom);
+            builder.setTitle(getString(R.string.password));
+            builder.setMessage(getString(R.string.pleaseEnterPassword));
+            builder.setView(view1);
+            builder.setPositiveButton(getString(R.string.ok), (dialog, whichButton) -> {});
+            builder.setNegativeButton(getString(R.string.cancel), (dialog, whichButton) -> dialog.dismiss());
 
-                AlertDialog alert = builder.create();
-                alert.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-                alert.show();
+            AlertDialog alert = builder.create();
+            alert.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+            alert.show();
 
-                alert.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(v -> {
-                    if (!editText.getText().toString().isEmpty()) {
-                        String password = editText.getText().toString();
+            alert.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(v -> {
+                if (!editText.getText().toString().isEmpty()) {
+                    String password = editText.getText().toString();
 
-                        DbStable.getStableDocument(password).addOnCompleteListener(task -> {
-                            if (task.isSuccessful()) {
-                                if (task.getResult().isEmpty()) {
-                                    Toast.makeText(LoginActivity.this, getString(R.string.invalidPassword), Toast.LENGTH_SHORT).show();
-                                    return;
-                                }
-
-                                for (DocumentSnapshot document : task.getResult()) {
-                                    String uid = document.getId();
-                                    if (uid == null)
-                                        return;
-
-                                    Stable stable = document.toObject(Stable.class);
-                                    // add uid to stable object
-                                    stable.setIdStable(uid);
-
-                                    // save stable in shared preferences
-                                    SharedPreferencesManager.putStable(LoginActivity.this, stable);
-                                    startMainActivity();
-                                }
-
-                                alert.dismiss();
+                    DbStable.getStableDocument(password).addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            if (task.getResult().isEmpty()) {
+                                Toast.makeText(LoginActivity.this, getString(R.string.invalidPassword), Toast.LENGTH_SHORT).show();
+                                return;
                             }
-                        });
 
-                    } else {
-                        Toast.makeText(LoginActivity.this, getString(R.string.pleaseEnterPassword), Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
+                            for (DocumentSnapshot document : task.getResult()) {
+                                String uid = document.getId();
+                                if (uid == null)
+                                    return;
+
+                                Stable stable = document.toObject(Stable.class);
+                                // add uid to stable object
+                                stable.setIdStable(uid);
+
+                                // save stable in shared preferences
+                                SharedPreferencesManager.putStable(LoginActivity.this, stable);
+                                startMainActivity();
+                            }
+
+                            alert.dismiss();
+                        }
+                    });
+
+                } else {
+                    Toast.makeText(LoginActivity.this, getString(R.string.pleaseEnterPassword), Toast.LENGTH_SHORT).show();
+                }
+            });
         });
     }
 
