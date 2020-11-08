@@ -58,7 +58,5 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
         notificationManager.notify(NOTIFICATION_MANAGER_ID, builder.build());
-
-        System.out.println("call");
     }
 }

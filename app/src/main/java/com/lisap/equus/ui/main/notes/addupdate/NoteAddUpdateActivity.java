@@ -15,10 +15,10 @@ import com.lisap.equus.data.firestore.DbNote;
 import com.lisap.equus.data.retrofit.RetrofitManager;
 import com.lisap.equus.databinding.ActivityNoteAddUpdateBinding;
 import com.lisap.equus.data.preferences.SharedPreferencesManager;
+import com.lisap.equus.utils.Utils;
 
 import org.json.JSONObject;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import retrofit2.Call;
@@ -29,7 +29,6 @@ public class NoteAddUpdateActivity extends AppCompatActivity {
     private ActivityNoteAddUpdateBinding binding;
     private String date, message;
     private Note extraNote;
-    private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,7 +89,7 @@ public class NoteAddUpdateActivity extends AppCompatActivity {
             calendar.set(Calendar.MONTH, monthOfYear);
             calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
-            binding.activityNoteAddUpdateEditDate.setText(sdf.format(calendar.getTime()));
+            binding.activityNoteAddUpdateEditDate.setText(Utils.getDateInRightFormat(calendar.getTime()));
         };
 
         binding.activityNoteAddUpdateEditDate.setOnClickListener(view -> {

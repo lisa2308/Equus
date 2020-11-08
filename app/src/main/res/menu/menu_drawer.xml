@@ -12,7 +12,7 @@
                 android:icon="@drawable/ic_helmet"
                 android:title="Propriétaires" />
             <item
-                android:id="@+id/activity_main_drawer_alarm"
+                android:id="@+id/activity_main_drawer_notif"
                 android:icon="@drawable/ic_notification_important_black_18dp"
                 android:title="Notifications" />
         </menu>

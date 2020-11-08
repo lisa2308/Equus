@@ -34,4 +34,19 @@ public class Stable {
                 ", stableName='" + stableName + '\'' +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Stable stable = (Stable) o;
+
+        return idStable != null ? idStable.equals(stable.idStable) : stable.idStable == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return idStable != null ? idStable.hashCode() : 0;
+    }
 }
