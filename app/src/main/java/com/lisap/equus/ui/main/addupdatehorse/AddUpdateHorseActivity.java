@@ -29,7 +29,7 @@ import com.lisap.equus.data.firestore.DbHorse;
 import com.lisap.equus.data.firestore.DbOwner;
 import com.lisap.equus.databinding.ActivityHorseAddUpdateBinding;
 import com.lisap.equus.utils.Constants;
-import com.lisap.equus.utils.SharedPreferencesManager;
+import com.lisap.equus.data.preferences.SharedPreferencesManager;
 import com.lisap.equus.utils.Utils;
 import com.squareup.picasso.Picasso;
 

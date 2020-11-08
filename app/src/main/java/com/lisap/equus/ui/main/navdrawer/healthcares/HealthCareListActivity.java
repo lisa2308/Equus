@@ -1,7 +1,6 @@
 package com.lisap.equus.ui.main.navdrawer.healthcares;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -9,27 +8,18 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.flatdialoglibrary.dialog.FlatDialog;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.lisap.equus.R;
-import com.lisap.equus.data.entities.HealthCare;
 import com.lisap.equus.data.entities.Horse;
-import com.lisap.equus.data.entities.Owner;
 import com.lisap.equus.data.firestore.DbHealthCare;
 import com.lisap.equus.data.firestore.DbHorse;
-import com.lisap.equus.data.firestore.DbOwner;
 import com.lisap.equus.databinding.ActivityHealthcareListBinding;
-import com.lisap.equus.databinding.ActivityOwnerListBinding;
-import com.lisap.equus.ui.main.MainActivity;
-import com.lisap.equus.ui.main.MainAdapter;
 import com.lisap.equus.ui.main.details.HorseDetailsActivity;
-import com.lisap.equus.ui.main.navdrawer.owners.addupdate.OwnerAddUpdateActivity;
 import com.lisap.equus.utils.RecyclerViewHolderListener;
-import com.lisap.equus.utils.SharedPreferencesManager;
+import com.lisap.equus.data.preferences.SharedPreferencesManager;
 
 import java.util.ArrayList;
 import java.util.List;

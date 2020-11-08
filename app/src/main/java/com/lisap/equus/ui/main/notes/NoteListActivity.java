@@ -21,7 +21,7 @@ import com.lisap.equus.databinding.ActivityNoteListBinding;
 
 import com.lisap.equus.ui.main.notes.addupdate.NoteAddUpdateActivity;
 import com.lisap.equus.utils.RecyclerViewHolderListener;
-import com.lisap.equus.utils.SharedPreferencesManager;
+import com.lisap.equus.data.preferences.SharedPreferencesManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -106,24 +106,24 @@ public class NoteListActivity extends AppCompatActivity {
 
     private void loadRecyclerData() {
         DbNote.getNoteDocumentList(SharedPreferencesManager.getStable(this).getIdStable())
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        List<Note> noteList = new ArrayList<>();
-                        for (DocumentSnapshot document : task.getResult()) {
-                            String uid = document.getId();
-                            if (uid == null)
-                                return;
+            .addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    List<Note> noteList = new ArrayList<>();
+                    for (DocumentSnapshot document : task.getResult()) {
+                        String uid = document.getId();
+                        if (uid == null)
+                            return;
 
-                            Note note = document.toObject(Note.class);
-                            // add uid to note object
-                            note.setNoteId(uid);
-                            noteList.add(note);
-                        }
-                        adapter.setData(noteList);
-                    } else {
-                        Toast.makeText(this, "Une erreur s'est produite", Toast.LENGTH_LONG).show();
+                        Note note = document.toObject(Note.class);
+                        // add uid to note object
+                        note.setNoteId(uid);
+                        noteList.add(note);
                     }
-                });
+                    adapter.setData(noteList);
+                } else {
+                    Toast.makeText(this, "Une erreur s'est produite", Toast.LENGTH_LONG).show();
+                }
+            });
     }
 
     private void startAddUpdateNoteActivity(Note note) {

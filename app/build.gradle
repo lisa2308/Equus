@@ -22,11 +22,6 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-
-            buildConfigField 'String', "Salt", salt
-        }
-        debug {
-            buildConfigField 'String', "Salt", salt
         }
     }
     buildFeatures {
@@ -43,6 +38,7 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'com.google.firebase:firebase-storage:19.1.1'
+    implementation 'com.google.firebase:firebase-messaging:21.0.0'
     testImplementation 'junit:junit:4.12'
     implementation 'com.google.gms:google-services:4.3.3'
     implementation 'com.airbnb.android:lottie:3.4.2'

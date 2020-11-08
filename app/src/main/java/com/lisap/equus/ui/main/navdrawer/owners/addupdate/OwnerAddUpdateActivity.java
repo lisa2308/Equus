@@ -11,7 +11,7 @@ import com.lisap.equus.R;
 import com.lisap.equus.data.entities.Owner;
 import com.lisap.equus.data.firestore.DbOwner;
 import com.lisap.equus.databinding.ActivityOwnerAddUpdateBinding;
-import com.lisap.equus.utils.SharedPreferencesManager;
+import com.lisap.equus.data.preferences.SharedPreferencesManager;
 
 public class OwnerAddUpdateActivity extends AppCompatActivity {
 

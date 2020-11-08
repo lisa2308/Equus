@@ -19,7 +19,7 @@ import com.lisap.equus.data.firestore.DbOwner;
 import com.lisap.equus.databinding.ActivityOwnerListBinding;
 import com.lisap.equus.ui.main.navdrawer.owners.addupdate.OwnerAddUpdateActivity;
 import com.lisap.equus.utils.RecyclerViewHolderListener;
-import com.lisap.equus.utils.SharedPreferencesManager;
+import com.lisap.equus.data.preferences.SharedPreferencesManager;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -12,7 +12,7 @@ import com.lisap.equus.R;
 import com.lisap.equus.data.entities.Note;
 import com.lisap.equus.data.firestore.DbNote;
 import com.lisap.equus.databinding.ActivityNoteAddUpdateBinding;
-import com.lisap.equus.utils.SharedPreferencesManager;
+import com.lisap.equus.data.preferences.SharedPreferencesManager;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

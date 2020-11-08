@@ -23,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.flatdialoglibrary.dialog.FlatDialog;
 import com.ferfalk.simplesearchview.SimpleSearchView;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.lisap.equus.data.entities.Horse;
 import com.lisap.equus.R;
 import com.lisap.equus.data.firestore.DbHorse;
@@ -36,7 +37,7 @@ import com.lisap.equus.ui.main.navdrawer.owners.OwnerListActivity;
 import com.lisap.equus.utils.RecyclerViewHolderListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
-import com.lisap.equus.utils.SharedPreferencesManager;
+import com.lisap.equus.data.preferences.SharedPreferencesManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -223,6 +224,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 startOwnerListActivity();
                 break;
             case R.id.activity_main_drawer_logout:
+                // unsubscribe from FCM topic
+                FirebaseMessaging.getInstance().unsubscribeFromTopic(SharedPreferencesManager.getStable(this).getIdStable());
+
                 SharedPreferencesManager.putStable(this, null);
                 startLoginActivity();
                 break;

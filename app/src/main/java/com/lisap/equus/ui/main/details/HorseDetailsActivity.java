@@ -1,6 +1,5 @@
 package com.lisap.equus.ui.main.details;
 
-import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Build;
 import android.os.Bundle;
@@ -21,19 +20,14 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.lisap.equus.R;
 import com.lisap.equus.data.entities.HealthCare;
 import com.lisap.equus.data.entities.Horse;
-import com.lisap.equus.data.entities.Note;
 import com.lisap.equus.data.entities.Owner;
 import com.lisap.equus.data.firestore.DbHealthCare;
 import com.lisap.equus.data.firestore.DbHorse;
-import com.lisap.equus.data.firestore.DbNote;
 import com.lisap.equus.data.firestore.DbOwner;
 import com.lisap.equus.databinding.ActivityHorseDetailsBinding;
-import com.lisap.equus.ui.main.MainActivity;
-import com.lisap.equus.ui.main.MainAdapter;
-import com.lisap.equus.ui.main.notes.NoteListActivity;
 import com.lisap.equus.utils.Constants;
 import com.lisap.equus.utils.RecyclerViewHolderListener;
-import com.lisap.equus.utils.SharedPreferencesManager;
+import com.lisap.equus.data.preferences.SharedPreferencesManager;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;

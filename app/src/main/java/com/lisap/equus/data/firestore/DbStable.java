@@ -15,6 +15,10 @@ public class DbStable {
     }
 
     // --- GET ---
+    public static Task<QuerySnapshot> getStableDocumentList() {
+        return getStableCollection().get();
+    }
+
     public static Task<QuerySnapshot> getStableDocument(String password) {
         return getStableCollection().whereEqualTo("password", password).limit(1).get();
     }

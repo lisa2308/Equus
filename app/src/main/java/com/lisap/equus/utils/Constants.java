@@ -1,7 +1,8 @@
 package com.lisap.equus.utils;
 
-public class Constants {
+import com.lisap.equus.BuildConfig;
 
+public class Constants {
     // SHARED PREFERENCES
     public final static long DATA_UPLOAD_MAX_MEMORY_SIZE = 1024 * 1024 * 2;
 
@@ -15,9 +16,10 @@ public class Constants {
     public static final String FIREBASE_COLLECTION_NAME_NOTES = "notes";
     public static final String FIREBASE_COLLECTION_NAME_CARES = "cares";
 
-
     // FIREBASE STORAGE
     public static final String START_URL = "https://firebasestorage.googleapis.com/v0/b/equus-96452.appspot.com/o/";
     public static final String END_URL = "?alt=media";
 
+    // FIREBASE NOTIFICATIONS
+    public static final String NOTIFICATION_CHANNEL_ID = "CHANNEL_ID";
 }
