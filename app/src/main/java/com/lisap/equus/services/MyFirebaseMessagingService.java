@@ -1,9 +1,12 @@
 package com.lisap.equus.services;
 
 import android.annotation.SuppressLint;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
@@ -13,6 +16,8 @@ import com.google.firebase.messaging.RemoteMessage;
 import com.lisap.equus.R;
 import com.lisap.equus.ui.login.LoginActivity;
 import com.lisap.equus.utils.Constants;
+
+import java.util.Objects;
 
 @SuppressLint("MissingFirebaseInstanceTokenRefresh")
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
@@ -33,6 +38,15 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 this, 1, notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT
         );
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "Nouvelles notes";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(Constants.NOTIFICATION_CHANNEL_ID, name, importance);
+            channel.setDescription("Soyez notifié des nouvelles notes");
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            Objects.requireNonNull(notificationManager).createNotificationChannel(channel);
+        }
+
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, Constants.NOTIFICATION_CHANNEL_ID)
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle("Nouvelle note")
@@ -44,5 +58,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
         notificationManager.notify(NOTIFICATION_MANAGER_ID, builder.build());
+
+        System.out.println("call");
     }
 }

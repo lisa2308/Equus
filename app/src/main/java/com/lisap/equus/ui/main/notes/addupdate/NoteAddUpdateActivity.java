@@ -8,14 +8,22 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.gson.JsonObject;
 import com.lisap.equus.R;
 import com.lisap.equus.data.entities.Note;
 import com.lisap.equus.data.firestore.DbNote;
+import com.lisap.equus.data.retrofit.RetrofitManager;
 import com.lisap.equus.databinding.ActivityNoteAddUpdateBinding;
 import com.lisap.equus.data.preferences.SharedPreferencesManager;
 
+import org.json.JSONObject;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class NoteAddUpdateActivity extends AppCompatActivity {
     private ActivityNoteAddUpdateBinding binding;
@@ -114,6 +122,7 @@ public class NoteAddUpdateActivity extends AppCompatActivity {
                     ).addOnSuccessListener(documentReference -> {
                         hideBtnLoading();
                         Toast.makeText(this, "Nouvelle note ajoutée", Toast.LENGTH_LONG).show();
+                        sendFirebaseNotification();
                         onBackPressed();
                     }).addOnFailureListener(e -> {
                         hideBtnLoading();
@@ -137,6 +146,26 @@ public class NoteAddUpdateActivity extends AppCompatActivity {
                     });
                 }
             }
+        });
+    }
+
+    private void sendFirebaseNotification() {
+        JsonObject data = new JsonObject();
+        data.addProperty("/", "/");
+
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("to", "/topics/" + SharedPreferencesManager.getStable(this).getIdStable());
+        jsonObject.add("data", data);
+        jsonObject.addProperty("priority", "high");
+        jsonObject.addProperty("content_available", true);
+        jsonObject.addProperty("mutable_content", true);
+
+        RetrofitManager.getInstance().getService().postSendTopicNotificationNewNote(jsonObject).enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {}
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {}
         });
     }
 
