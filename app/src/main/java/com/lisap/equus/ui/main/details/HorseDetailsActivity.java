@@ -135,7 +135,6 @@ public class HorseDetailsActivity extends AppCompatActivity {
                     .setFirstButtonText("SUPPRIMER")
                         .setBackgroundColor(getColor(R.color.colorAccentLight))
                         .setFirstButtonColor(getColor(R.color.colorPrimaryLight))
-                        .setSecondButtonColor(getColor(R.color.colordelete))
                         .setTitleColor(getColor(R.color.colorPrimaryDark))
                     .isCancelable(true)
                     .withFirstButtonListner(view -> {
