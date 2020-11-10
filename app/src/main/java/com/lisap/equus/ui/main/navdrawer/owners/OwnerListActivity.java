@@ -2,11 +2,13 @@ package com.lisap.equus.ui.main.navdrawer.owners;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -58,6 +60,7 @@ public class OwnerListActivity extends AppCompatActivity {
                 makeCall(owner.getPhone());
             }
 
+            @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onItemLongClicked(RecyclerView.ViewHolder viewHolder, Object item, int pos) {
                 Owner owner = (Owner) item;
@@ -66,6 +69,10 @@ public class OwnerListActivity extends AppCompatActivity {
                 flatDialog.setTitle("Options")
                     .setFirstButtonText("MODIFIER")
                     .setSecondButtonText("SUPPRIMER")
+                        .setBackgroundColor(getColor(R.color.colorAccentLight))
+                        .setFirstButtonColor(getColor(R.color.colorPrimaryLight))
+                        .setSecondButtonColor(getColor(R.color.colordelete))
+                        .setTitleColor(getColor(R.color.colorPrimaryDark))
                     .isCancelable(true)
                     .withFirstButtonListner(view -> {
                         startAddUpdateOwnerActivity(owner);
